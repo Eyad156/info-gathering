@@ -2,6 +2,7 @@ import requests
 import socket
 import json
 import cowsay
+from colorama import Fore
 cowsay.daemon("Info-Gathering")
 def get_server_headers(domain):
     try:
@@ -30,10 +31,10 @@ def main():
     domain = input("Enter website name (e.g., 'google.com') -> ")
     try:
         ip = socket.gethostbyname(domain)
-        print(f"IP Address: {ip}")
+        print(f"IP Address: "+Fore.GREEN+f"{ip}")
         
-        get_server_headers(domain)
-        get_ip_info(ip)
+        get_server_headers(Fore.GREEN + domain)
+        get_ip_info(Fore.GREEN + ip)
         
     except socket.gaierror:
         print(f"Could not resolve domain: {domain}")
