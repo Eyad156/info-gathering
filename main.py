@@ -4,15 +4,13 @@ import json
 import cowsay
 import random
 from colorama import Fore, Style, init
-# Initialize colorama
 init(autoreset=True)
 colors = [Fore.RED, Fore.GREEN, Fore.YELLOW, Fore.BLUE, Fore.MAGENTA, Fore.CYAN, Fore.WHITE]
 def random_color():
     return random.choice(colors)
-cowsay.daemon("Info-Gathering\n")
-print(Fore.WHITE + '-' * 80)
-print(Fore.WHITE + f'[📩] Developed By @Eyad156 \n[📢] Youtube Channel: https://www.youtube.com/@Driply1704')
-print(Fore.WHITE + '-' * 80)
+
+cowsay.daemon("Info-Gathering")
+
 def get_server_headers(domain):
     try:
         response = requests.get(f'http://{domain}')
@@ -36,17 +34,25 @@ def get_ip_info(ip):
         print(random_color() + f"An error occurred: {e}")
 
 def main():
-    domain = input("Enter website name (e.g., 'google.com') -> ")
-    try:
-        ip = socket.gethostbyname(domain)
-        print(random_color() + f"IP Address: {ip}")
+    while True:
+        domain = input("Enter website name (e.g., 'google.com') -> ")
+        if not domain.strip():
+            print("Exiting...")
+            break
+        try:
+            ip = socket.gethostbyname(domain)
+            print(random_color() + f"IP Address: {ip}")
+            
+            get_server_headers(domain)
+            get_ip_info(ip)
+            
+        except socket.gaierror:
+            print(random_color() + f"Could not resolve domain: {domain}")
         
-        get_server_headers(domain)
-        get_ip_info(ip)
-        
-    except socket.gaierror:
-        print(random_color() + f"Could not resolve domain: {domain}")
+        continue_choice = input("Press Enter to exit or any other key to continue: ")
+        if not continue_choice.strip():
+            print("Exiting...")
+            break
 
 if __name__ == "__main__":
     main()
-# نن
