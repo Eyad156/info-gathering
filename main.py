@@ -4,19 +4,15 @@ import json
 import cowsay
 import random
 from colorama import Fore, Style, init
-
 # Initialize colorama
 init(autoreset=True)
-
-# List of colors
 colors = [Fore.RED, Fore.GREEN, Fore.YELLOW, Fore.BLUE, Fore.MAGENTA, Fore.CYAN, Fore.WHITE]
-
-# Function to get a random color
 def random_color():
     return random.choice(colors)
-
-cowsay.daemon("Info-Gathering")
-
+cowsay.daemon("Info-Gathering\n")
+print(Fore.WHITE + '-' * 80)
+print(Fore.WHITE + f'[📩] Developed By @Eyad156 \n[📢] Youtube Channel: https://www.youtube.com/@Driply1704')
+print(Fore.WHITE + '-' * 80)
 def get_server_headers(domain):
     try:
         response = requests.get(f'http://{domain}')
